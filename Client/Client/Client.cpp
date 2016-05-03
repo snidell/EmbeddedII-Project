@@ -206,7 +206,7 @@ VOID client_iface_thread(LPVOID parameters) //LPVOID parameters)
 			std::vector<double> myDouble;
 			for(int i=0;i<size;i++){
 				retval = recvfrom(comm->cmdrecvsock, ParamBuffer, sizeof(ParamBuffer), 0, (struct sockaddr *)&saddr, &saddr_len);
-				std::cout<<"Parambuff: "<<i<<" "<<ParamBuffer<<std::endl;
+				//std::cout<<"Parambuff: "<<i<<" "<<ParamBuffer<<std::endl;
 				myDouble.push_back(atof(ParamBuffer));
 			}
 			//verifying data

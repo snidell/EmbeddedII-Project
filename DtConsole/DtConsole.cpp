@@ -36,28 +36,18 @@ HBUF hBufs[NUM_OL_BUFFERS];
 HDEV hDev;
 
 
-
-int lastValue=0;
-int first = 1;
-int currentValue=0;
-int counter = 0;
 DBL min=0,max=1;
-DBL volts;
 ULNG value;
-DBL voltsSW;
 ULNG switchValue;
 ULNG samples;
 UINT encoding=0,resolution=0;
 PDWORD pBuffer32 = NULL;
 PWORD pBuffer = NULL;
-char WindowTitle[128];
-char temp[128];
-int i = 0;
-int j = 0;
+
+
 std::vector<double>filter;
 
-char stat[128];
-int y;
+
 char inputChar[300] = "";
 char myChar[1024]="";
 int readyFlag = 1;
@@ -81,6 +71,7 @@ std::vector<double> transientOverFlow(transientOverAmount,0);
 double bufHundred[100];
 bool filtering = false;
 int processingStopped = 1;
+int fileNum=0;
 
 
 
@@ -99,6 +90,9 @@ std::string getMax(std::vector<double>filteredSignal);
 std::string getMin(std::vector<double>filteredSignal);
 double getAverage(std::vector<double>filteredSignal);
 std::string getVariance(std::vector<double>filteredSignal);
+int saveToCSV(const std::string& filename, std::vector<double> signal);
+const char* intToChar(int myInt);
+const char* intToChar(double myInt);
 
 //DT Console Structs---------------------------------------------------------------------
 
@@ -221,8 +215,8 @@ LRESULT WINAPI
 WndProc( HWND hWnd, UINT msg, WPARAM hAD, LPARAM lParam )
 {
 	
-	std::cout<<"wndProc called"<<std::endl;
-	std::cout<<"MSG: "<<msg<<std::endl;
+	//std::cout<<"wndProc called"<<std::endl;
+	//std::cout<<"MSG: "<<msg<<std::endl;
     switch( msg )
 	{
 		case OLDA_WM_BUFFER_DONE:
@@ -232,9 +226,7 @@ WndProc( HWND hWnd, UINT msg, WPARAM hAD, LPARAM lParam )
 		{
 			
 			CHECKERROR(olDaGetRange((HDASS)hAD,&max,&min));
-			
 			CHECKERROR(olDaGetEncoding((HDASS)hAD,&encoding));
-			
 			CHECKERROR(olDaGetResolution((HDASS)hAD,&resolution));
 			
 			CHECKERROR(olDmGetValidSamples( hBuf, &samples )) ;
@@ -247,29 +239,47 @@ WndProc( HWND hWnd, UINT msg, WPARAM hAD, LPARAM lParam )
 			else
 			{
 				CHECKERROR(olDmGetBufferPtr( hBuf,(LPVOID*)&pBuffer));
+				//switchValuye is ULNG
 				switchValue = pBuffer[samples-1];
-				std::cout<<"switch: "<<switchValue<<std::endl;
 
 				if (switchValue >= 45000)
 				{
+					//test
+					//switchValue = pBuffer[samples-2];
+					//swvolts = ((float)max-(float)min)/(1L<<resolution)*switchValue + (float)min;
+					//ULNG digitalValue; this worked
+					//digitalValue=pBuffer[samples-2];
+					//double myDouble;
+					//myDouble=((float)max-(float)min)/(1L<<resolution)*digitalValue + (float)min;
+					//std::cout<<"test volt: "<<myDouble<<std::endl;
+					
 					if (readyFlag)
 					{
 						sprintf(inputChar,"DAQ started");
 						send(comm->datasock, inputChar, sizeof(inputChar), 0);
 					}
+
+					ULNG digitalValue;
+					double analogVolts;
 					//Start processing data out of pBuffer
-					filtering = false;
-					//sampels =2*sampling rate,
-					for(int i=0;i<samples;i+2){
-						value=pBuffer[i];
-						volts = ((float)max-(float)min)/(1L<<resolution)*value +(float)min;
-						rawSignal.push_back(volts);
+					for(int i=0;i<samples;i+=2){
+						digitalValue=pBuffer[i];
+						analogVolts=((float)max-(float)min)/(1L<<resolution)*digitalValue + (float)min;
+						rawSignal.push_back(analogVolts);
 					}
+					saveToCSV("raw.csv",rawSignal);
+					filtering = false;
+					setLED(1);					
+					
+					CHECKERROR(olDaPutBuffer((HDASS)hAD, hBuf));					
+					system("pause");
+					
 					std::vector<double>filteredSignal;
 					filteredSignal=	filterSignal(rawSignal,filter,transientOverFlow,transientOverAmount);					
-					//get min max etc.
+					
+					//get min max etc.					
 					getStats(filteredSignal);
-
+					
 					//send signal to transmit convolved data
 					sprintf(inputChar,"CompleteData");
 					send(comm->datasock, inputChar, sizeof(inputChar), 0);
@@ -304,7 +314,7 @@ WndProc( HWND hWnd, UINT msg, WPARAM hAD, LPARAM lParam )
 					send(comm->datasock, inputChar, sizeof(inputChar), 0);
 
 					filtering = true;
-					setLED(1);
+					
 					readyFlag = 0;
 					processingStopped = 1;
 				}
@@ -323,14 +333,7 @@ WndProc( HWND hWnd, UINT msg, WPARAM hAD, LPARAM lParam )
 					
 				}
 			}
-			CHECKERROR(olDaPutBuffer((HDASS)hAD, hBuf));
-			if (encoding != OL_ENC_BINARY)
-			{
-				value ^= 1L << (resolution-1);
-				value &= (1L << resolution) - 1;
-				switchValue^= 1L << (resolution-1);
-				switchValue &= (1L << resolution) - 1;
-			}
+			
 		}
 		break;
 	
@@ -353,7 +356,7 @@ WndProc( HWND hWnd, UINT msg, WPARAM hAD, LPARAM lParam )
 		return DefWindowProc( hWnd, msg, hAD, lParam );
 		
 	}
-	std::cout<<"tests 1:"<<std::endl;
+	//std::cout<<"tests 1:"<<std::endl;
 	return 0;
 }
 
@@ -455,7 +458,6 @@ VOID client_iface_thread(LPVOID parameters)
 	struct sockaddr_in saddr;
 	int saddr_len;
 	char ParamBuffer[110] = {0};
-	int y = 1;
 	while(ParamBuffer[0] != '!')
 	{
 		memset(ParamBuffer, 0, sizeof(ParamBuffer));
@@ -466,7 +468,7 @@ VOID client_iface_thread(LPVOID parameters)
 			std::cout<<"Start Signal Received Waiting for Switch"<<std::endl;
 			sprintf(inputChar,"Server: Start signal Received Waiting for Switch");
 			send(comm->datasock, inputChar, sizeof(inputChar), 0);
-			//startDAQ();///////////////////---------------Reset in lab
+			startDAQ();///////////////////---------------Reset in lab
 			startSignal = true;
 		}
 		if(strcmp(ParamBuffer, "Stop") == 0)
@@ -499,12 +501,12 @@ VOID client_iface_thread(LPVOID parameters)
 			printf("Current Sample Rate: %f\n", sampleRate);
 			sprintf(inputChar,"Server: Sample Rate Received by Server");
 			send(comm->datasock, inputChar, sizeof(inputChar), 0);
-			//intilializeBoard();///////////-------------Reset in lab
+			intilializeBoard();///////////-------------Reset in lab
 			startSignal=true;
 		}
 		if(strcmp(ParamBuffer, "FilterWeights") == 0)
 		{
-			for(i=0;i<100;i++)
+			for(int i=0;i<100;i++)
 			{
 				retval = recvfrom(comm->cmdrecvsock, ParamBuffer, sizeof(ParamBuffer), 0, (struct sockaddr *)&saddr, &saddr_len);
 				//std::cout<<"i: "<<i<<std::endl;
@@ -600,7 +602,7 @@ int intilializeBoard(){
     CHECKERROR( olDaSetClockFrequency( hAD, sampleRate) ); //Set when SampleRate is recevied by client
     CHECKERROR( olDaSetWrapMode( hAD, OL_WRP_NONE ) );
     CHECKERROR( olDaConfig( hAD ) );
-	std::cout<<"hAD: "<< hAD<<std::endl;
+	//std::cout<<"hAD: "<< hAD<<std::endl;
 
     
     for( int i=0; i < NUM_OL_BUFFERS; i++ )
@@ -621,12 +623,11 @@ int intilializeBoard(){
 void startDAQ(){
 	if( OLSUCCESS != ( olDaStart( hAD ) ) )
     {
-       printf( "( .) ( . )A/D Operation Start Failed...hit any key to terminate.\n" );
+       printf( "A/D Operation Start Failed...hit any key to terminate.\n" );
     }
     else
     {
        printf( "A/D Operation Started...hit any key to terminate.\n\n" );
-       printf( "Buffer Done Count : %ld \r", counter );
     }   
 
     MSG msg;                                    
@@ -655,7 +656,7 @@ void startDAQ(){
     olDaAbort( hAD );
     printf( "\nA/D Operation Terminated \n" );
 
-    for( i=0; i<NUM_OL_BUFFERS; i++ ) 
+    for(int i=0; i<NUM_OL_BUFFERS; i++ ) 
     {
        olDmFreeBuffer( hBufs[i] );
     }   
@@ -681,7 +682,7 @@ void startDAQ(){
 //returns: signal modified by filter
 //updates transientOverflow at Global scope
 std::vector<double> filterSignal(std::vector<double> filter, std::vector<double> signal,std::vector<double> transientOverFlow,int transientOverAmount){
-	
+	std::cout<<"enter convolve"<<std::endl;
 	//Multi block is calculated by col=signalLength+(FilterLength-1)	
 	int columnLength=signal.size()+(filter.size()-1);
 	//row is calculated by row=filterLength
@@ -691,16 +692,16 @@ std::vector<double> filterSignal(std::vector<double> filter, std::vector<double>
 	std::vector<double> filteredSignal;
 	filteredSignal.resize(filteredSignalSize);
 	//resize signal for convolution
-	std::cout<<"Signal original size"<<signal.size()<<std::endl;
+	//std::cout<<"Signal original size"<<signal.size()<<std::endl;
 	for(int i=signal.size();i<columnLength;i++){
 		signal.push_back(0);
 	}
-	std::cout<<"new signal size: "<<signal.size()<<std::endl;
+	//std::cout<<"new signal size: "<<signal.size()<<std::endl;
 	
 	//Resize colum anbd rows
 	std::vector<std:: vector< double> > multiBlock(rowLength, std::vector<double> ( columnLength, 0 ));
-	std::cout<<"Size of row: "<< multiBlock.size()<<"Size of Columns: "<< multiBlock[0].size()<<std::endl;
-	
+	//std::cout<<"Size of row: "<< multiBlock.size()<<"Size of Columns: "<< multiBlock[0].size()<<std::endl;
+	std::cout<<"matrix setup"<<std::endl;
 	//convolution	
 	for(int k=0;k<filter.size();k++){
 		for(int n=0;n<signal.size();n++){			
@@ -728,23 +729,27 @@ std::vector<double> filterSignal(std::vector<double> filter, std::vector<double>
 	}
 	//set the transient overflow to current filter
 	for(int i=0;i<transientOverFlow.size();i++){
-		std::cout<<"filter val: "<<filteredSignal[i]<< " + "<<transientOverFlow[i]<<std::endl;
+		//std::cout<<"filter val: "<<filteredSignal[i]<< " + "<<transientOverFlow[i]<<std::endl;
 		filteredSignal[i]+=transientOverFlow[i];
-		std::cout<<"filterSignal: "<<filteredSignal[i]<<std::endl;
+		//std::cout<<"filterSignal: "<<filteredSignal[i]<<std::endl;
 	}
 	
 	//print out the filtered signal
-	std::cout<<"Filtered signal: "<<std::endl;
-	for(int i=0;i<filteredSignal.size();i++){
-		std::cout<<filteredSignal[i]<<std::endl;
-	}
+	//std::cout<<"Filtered signal: "<<std::endl;
+	//for(int i=0;i<filteredSignal.size();i++){
+		//std::cout<<filteredSignal[i]<<std::endl;
+	//}
 	
-	//return to transient region
+	std::cout<<"transient"<<std::endl;
 	int j=0;
-	for(int i=(filteredSignal.size()-transientOverAmount);i<filteredSignal.size();i++){		
+	std::cout<<"FilterSize"<<filteredSignal.size()<<"overFlowAmt:"<<transientOverAmount<<std::endl;
+	/*for(int i=(filteredSignal.size()-transientOverAmount);i<filteredSignal.size();i++){		
 		transientOverFlow[j]=filteredSignal[i];
+		std::cout<<"i: "<<i<<"j: "<<j<<std::endl;
 		j++;
-	}
+	}*/
+	system("pause");
+	std::cout<<"Convolve done"<<std::endl;
 	return filteredSignal;
 }
 //helper methods that gets MAX/MIN/VAR/AVG
@@ -813,4 +818,36 @@ std::string getVariance(std::vector<double>filteredSignal){
          
 	strs<<variance;
 	return strs.str();
+}
+int saveToCSV(const std::string& filename, std::vector<double> signal){
+	//requires fstream
+	std::fstream f;
+    f.open(filename, std::ios::out);
+    for(int i=0; i<signal.size(); i++){
+		if(i==signal.size()-1){
+			f<<signal[i];
+		}else{			
+			f << signal[i]<<',';
+	    }		
+	}     
+    f.close();
+	std::cout<<"Size of signal: "<<signal.size()<<std::endl;
+    return 0;
+
+}
+
+const char* intToChar(int myInt){
+	std::stringstream strs;
+	strs << myInt;
+	std::string temp_str = strs.str();
+	char const* pchar = temp_str.c_str();
+	return pchar;
+}
+
+const char* doubleToChar(double myInt){
+	std::stringstream strs;
+	strs << myInt;
+	std::string temp_str = strs.str();
+	char const* pchar = temp_str.c_str();
+	return pchar;
 }

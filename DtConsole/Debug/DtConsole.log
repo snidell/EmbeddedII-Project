@@ -1,76 +1,74 @@
-﻿Build started 5/2/2016 9:00:11 PM.
-     1>Project "C:\Users\ScottN\Google Drive\Project2\DtConsole\DtConsole.vcxproj" on node 2 (build target(s)).
+﻿Build started 5/3/2016 6:41:28 PM.
+     1>Project "C:\Users\ScottN\Google Drive\Project2\EmbeddedII-Project\DtConsole\DtConsole.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating ".\Debug\DtConsole.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Data Translation\Win32\SDK\\Include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug\\" /Fd".\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt DtConsole.cpp
          DtConsole.cpp
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(87): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(78): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : see declaration of 'fopen'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(88): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(79): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : see declaration of 'fopen'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(125): warning C4005: 'CHECKERROR' : macro redefinition
-                 c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(112) : see previous definition of 'CHECKERROR'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(257): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(119): warning C4005: 'CHECKERROR' : macro redefinition
+                 c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(106) : see previous definition of 'CHECKERROR'
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(258): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(263): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(263): warning C4552: '+' : operator has no effect; expected operator with side-effect
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(274): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(265): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(284): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(284): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(294): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(288): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(295): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(298): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(305): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(299): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(309): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(303): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(313): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(317): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(327): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(388): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(391): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(368): warning C4101: 'ParamBuffer' : unreferenced local variable
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(467): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(371): warning C4101: 'ParamBuffer' : unreferenced local variable
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(469): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(476): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(478): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(497): warning C4244: '=' : conversion from 'double' to 'ULNG', possible loss of data
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(500): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(499): warning C4244: '=' : conversion from 'double' to 'ULNG', possible loss of data
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(502): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(514): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(516): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(522): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(524): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(524): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(526): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(537): warning C4101: 'saddr_len' : unreferenced local variable
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(535): warning C4101: 'retval' : unreferenced local variable
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(536): warning C4101: 'saddr' : unreferenced local variable
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(672): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(539): warning C4101: 'saddr_len' : unreferenced local variable
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(537): warning C4101: 'retval' : unreferenced local variable
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(538): warning C4101: 'saddr' : unreferenced local variable
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(673): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(304) : see declaration of 'scanf'
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(705): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(706): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(725): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(730): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(738): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(744): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(764): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(777): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(790): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(808): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\scottn\google drive\project2\dtconsole\dtconsole.cpp(618): warning C4715: 'intilializeBoard' : not all control paths return a value
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(706): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(707): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(726): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(731): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(769): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(782): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(795): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(813): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(826): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\scottn\google drive\project2\embeddedii-project\dtconsole\dtconsole.cpp(620): warning C4715: 'intilializeBoard' : not all control paths return a value
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug\DtConsole.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Program Files (x86)\Data Translation\Win32\SDK\\Lib" oldaapi32.lib olmem32.lib odbc32.lib odbccp32.lib Ws2_32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:".\Debug\DtConsole.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\ScottN\Google Drive\Project2\DtConsole\Debug\DtConsole.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\DtConsole.lib" /MACHINE:X86 .\Debug\DtConsole.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug\DtConsole.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Program Files (x86)\Data Translation\Win32\SDK\\Lib" oldaapi32.lib olmem32.lib odbc32.lib odbccp32.lib Ws2_32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:".\Debug\DtConsole.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\ScottN\Google Drive\Project2\EmbeddedII-Project\DtConsole\Debug\DtConsole.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\DtConsole.lib" /MACHINE:X86 .\Debug\DtConsole.obj
      1>DtConsole.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
-         DtConsole.vcxproj -> C:\Users\ScottN\Google Drive\Project2\DtConsole\.\Debug\DtConsole.exe
+         DtConsole.vcxproj -> C:\Users\ScottN\Google Drive\Project2\EmbeddedII-Project\DtConsole\.\Debug\DtConsole.exe
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:".\Debug\DtConsole.exe;#1" /manifest .\Debug\DtConsole.exe.intermediate.manifest
        FinalizeBuildStatus:
          Deleting file ".\Debug\DtConsole.unsuccessfulbuild".
          Touching ".\Debug\DtConsole.lastbuildstate".
-     1>Done Building Project "C:\Users\ScottN\Google Drive\Project2\DtConsole\DtConsole.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\ScottN\Google Drive\Project2\EmbeddedII-Project\DtConsole\DtConsole.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.43
+Time Elapsed 00:00:01.41

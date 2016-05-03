@@ -2,21 +2,16 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{d0ad430c-a945-4af4-a052-42530da45d38}</UniqueIdentifier>
+      <UniqueIdentifier>{cbf44b76-ea29-49b7-a880-c505313d6236}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{645e2fb9-fa7f-4894-a3f5-a764b4c7fc3f}</UniqueIdentifier>
+      <UniqueIdentifier>{8c5849be-9375-432b-bc83-d575c9b552fe}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{bf8185e2-5ed8-45f2-aab8-d8268f6a354c}</UniqueIdentifier>
+      <UniqueIdentifier>{a7c42fc3-f884-4237-aa94-75313353149c}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="DtConsole.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
