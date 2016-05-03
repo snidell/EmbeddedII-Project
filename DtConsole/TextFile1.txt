@@ -1,0 +1,67 @@
+std::vector<double> filterSignal(std::vector<double> filter, std::vector<double> signal,std::vector<double> transientOverFlow,int transientOverAmount){
+	
+	//Multi block is calculated by col=signalLength+(FilterLength-1)	
+	int columnLength=signal.size()+(filter.size()-1);
+	//row is calculated by row=filterLength
+	int rowLength=filter.size();	
+	//filtered signal length=columnLength
+	int filteredSignalSize= columnLength;
+	std::vector<double> filteredSignal;
+	filteredSignal.resize(filteredSignalSize);
+	//resize signal for convolution
+	std::cout<<"Signal original size"<<signal.size()<<std::endl;
+	for(int i=signal.size();i<columnLength;i++){
+		signal.push_back(0);
+	}
+	std::cout<<"new signal size: "<<signal.size()<<std::endl;
+	
+	//Resize colum anbd rows
+	std::vector<std:: vector< double> > multiBlock(rowLength, std::vector<double> ( columnLength, 0 ));
+	std::cout<<"Size of row: "<< multiBlock.size()<<"Size of Columns: "<< multiBlock[0].size()<<std::endl;
+	
+	//convolution	
+	for(int k=0;k<filter.size();k++){
+		for(int n=0;n<signal.size();n++){			
+			if((n-k)>=0){
+			    multiBlock[k][n]= filter[k]*signal[n-k];
+			}
+			
+		}
+	}
+	
+	/*save multiblock to CSV
+	fstream f;
+	f.open("multiBlock.csv", ios::out);
+	for(int k=0;k<filter.size();k++){
+		for(int n=0;n<columnLength;n++){			
+			    f<<multiBlock[k][n]<<',';			
+		}
+		f<<endl;
+	}*/
+	//add up the columns
+	for(int i=0;i<columnLength;i++){
+		for(int j=0;j<filter.size();j++){
+			filteredSignal[i]= filteredSignal[i]+multiBlock[j][i];
+		}
+	}
+	//set the transient overflow to current filter
+	for(int i=0;i<transientOverFlow.size();i++){
+		std::cout<<"filter val: "<<filteredSignal[i]<< " + "<<transientOverFlow[i]<<std::endl;
+		filteredSignal[i]+=transientOverFlow[i];
+		std::cout<<"filterSignal: "<<filteredSignal[i]<<std::endl;
+	}
+	
+	//print out the filtered signal
+	std::cout<<"Filtered signal: "<<std::endl;
+	for(int i=0;i<filteredSignal.size();i++){
+		std::cout<<filteredSignal[i]<<std::endl;
+	}
+	
+	//return to transient region
+	int j=0;
+	for(int i=(filteredSignal.size()-transientOverAmount);i<filteredSignal.size();i++){		
+		transientOverFlow[j]=filteredSignal[i];
+		j++;
+	}
+	return filteredSignal;
+}
